@@ -11,7 +11,7 @@ class WineDataset:
   '''
   
   # Create WineDataset object
-  def __init__(self, file_path, wine_type="unknown")
+  def __init__(self, file_path, wine_type="unknown"):
     self.file_path = Path(file_path)
     self.wine_type = wine_type
     self.data = None
