@@ -35,7 +35,7 @@ class WineDataset:
     if self.data is None:
       return f"WineDataset({self.wine_type} wine, not loaded yet)"
 
-    return f"WineDataset({self.wine_type) wine, {len(self.data)} rows loaded)"
+    return f"WineDataset({self.wine_type} wine, {len(self.data)} rows loaded)"
 
   # Return number of rows in cleaned dataset
   def __len__(self):
