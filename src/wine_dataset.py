@@ -21,8 +21,8 @@ class WineDataset:
       "citric acid",
       "residual sugar",
       "chlorides",
-      "free sulfer dioxide",
-      "total sulfer dioxide",
+      "free sulfur dioxide",
+      "total sulfur dioxide",
       "density",
       "pH",
       "sulphates",
@@ -102,7 +102,7 @@ class WineDataset:
     self.data = self.data.drop_duplicates()
 
     ending_rows_after_duplicates = len(self.data)
-    cleaning_summary["duplicates_removed"] = starting_rows = ending_rows_after_duplicates
+    cleaning_summary["duplicates_removed"] = starting_rows - ending_rows_after_duplicates
 
     # Fill in missing values with averages and update summary
     for column in self.required_columns:
@@ -110,7 +110,7 @@ class WineDataset:
 
       if missing_count > 0:
         column_average = self.data[column].mean()
-        self.data[colums] = self.data[column].fillna(column_average)
+        self.data[column] = self.data[column].fillna(column_average)
         cleaning_summary["missing_values_filled"] += missing_count
 
     self.data["quality"] = self.data["quality"].round().astype(int)
