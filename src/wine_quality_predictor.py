@@ -55,6 +55,8 @@ def recommend(self,user_features, top_n=5):
       distance=0
     for feature in features:
       distance+=(row[feature]-user_features[feature])**2
-      
+      distances.append(distance)
+    df["distance"]=distances
+    return df.sort_values("distance").head(top_n)
     
     
