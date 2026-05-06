@@ -130,7 +130,7 @@ class WineQualityAnalyzer:
 
     return categories 
 
-  def get_high_quality_features_summary(self):
+  def get_high_quality_feature_summary(self):
     '''
     Calculate average feature values for high-quality wines
     '''
