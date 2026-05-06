@@ -26,3 +26,35 @@ def predict_quality(self, user_features):
     score = 0
     total_weight = 0
     
+    for feature, weight in weights.items():
+      if feature not in user_features:
+        raise ValueError(f"Missing feature: {feature}")
+    user_value=user_features[feature]
+    ideal_value=high_quality_avg[feature]
+    diff=abs(user_value-ideal_value)
+    correlation=max(0,1-diff/(ideal_value+1e-5))
+    score+=correlation*weight
+    total_weight+=weight
+    normal=score/total_weight
+    prediction=3+(normalized*6)
+    return round(prediction, 2)
+    
+def recommend(self,user_featyres, top_n=5):
+  df=self.datacopy()
+  features=[
+    "alcohol",
+    "volatile acidity",
+    "citric acid",
+    "residual sugar",
+    "pH",
+    "sulphates"
+    ]
+    distances=[]
+    
+    for row in df.iterrows():
+      distance=0
+    for feature in features:
+      distance+=(row[feature]-user_features[feature])**2
+      
+    
+    
