@@ -39,7 +39,7 @@ def predict_quality(self, user_features):
     prediction=3+(normalized*6)
     return round(prediction, 2)
     
-def recommend(self,user_featyres, top_n=5):
+def recommend(self,user_features, top_n=5):
   df=self.datacopy()
   features=[
     "alcohol",
