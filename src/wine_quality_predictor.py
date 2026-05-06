@@ -12,4 +12,17 @@ self.analyzer = analyzer
 self.data = analyzer.data
 
 def predict_quality(self, user_features):
-  
+  highest_quality_avg = self.analyzer.get_high_quality_feature_summary()
+
+  weights = {
+    "alchohol": 2.0,
+    "voltaile acidity": 2.0,
+    "sulphates": 1.5,
+    "citric acid" 1.0,
+    "residual sugar": 1.0,
+    "pH": 1.0
+    }
+
+    score = 0
+    total_weight = 0
+    
