@@ -139,7 +139,7 @@ class WineQualityAnalyzer:
     if len(high_quality_wines) == 0:
       raise ValueError("There are no high-quality wines in this dataset")
 
-    important_columns - [
+    important_columns = [
       "alcohol",
       "volatile acidity",
       "citric acid",
