@@ -171,3 +171,17 @@ class WineQualityAnalyzer:
       return f"{other_analyzer.wine_type} wine has a higher average quality than {self.wine_type} wine"
     else:
       return f"{self.wine_type} wine and {other_analyzer.wine_type} wine have the same average quality"
+
+  def get_shared_quality_scores(self, other_analyzer):
+    '''
+    Find quality scores that appear in both wine datasets using set operations.
+    '''
+    if not isinstance(other_analyzer, WineQualityAnalyzer):
+      raise TypeError("other_analyzer must be a WineQualityAnalyzer object.")
+
+    this_quality_scores = set(self.data["quality"])
+    other_quality_scores = set(other_analyzer.data["quality"])
+
+    shared_scores = this_quality_scores & other_quality_scores
+
+    return shared_scores
