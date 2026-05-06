@@ -151,7 +151,7 @@ class WineQualityAnalyzer:
     feature_summary = {}
 
     for column in important_columns:
-      feature_summary[column] = round(high_quality_qines[column].mean(), 3)
+      feature_summary[column] = round(high_quality_wines[column].mean(), 3)
 
     return feature_summary
 
