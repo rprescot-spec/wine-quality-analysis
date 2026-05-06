@@ -92,7 +92,7 @@ class WineQualityAnalyzer:
 
     for quality in quality_scores:
       quality_rows = self.data[self.data["quality"] == quality]
-      average[quality] = round(quality_rows[column_name].mean(), 3)
+      averages[quality] = round(quality_rows[column_name].mean(), 3)
 
     return averages
 
