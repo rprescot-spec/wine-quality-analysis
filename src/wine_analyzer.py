@@ -7,7 +7,7 @@ class WineQualityAnalyzer:
   '''
   Analyze a cleaned WineDataset object. 
 
-  Calculate summary statistics, fine top-quality wine, 
+  Calculate summary statistics, find top-quality wine, 
   compare averages, and group wine data by quality score. 
   '''
   
@@ -159,7 +159,7 @@ class WineQualityAnalyzer:
     '''
     Compre the average quality of this dataset with another analyzer
     '''
-    if not ininstance(other_analyzer, WineQualityAnalyzer):
+    if not isinstance(other_analyzer, WineQualityAnalyzer):
       raise TypeError("other_analyzer must be a WineQualityAnalyzer object")
 
     this_average = self.get_basic_summary()["average_quality"]
