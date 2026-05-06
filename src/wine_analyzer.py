@@ -77,7 +77,7 @@ class WineQualityAnalyzer:
     if not pd.api.types.is_numeric_dtype(self.data[column_name]):
       raise ValueError(f"{column_name} must be numeric")
 
-    return round(np.mean(self.data[column_name}), 3)
+    return round(np.mean(self.data[column_name]), 3)
 
   def get_average_by_quality(self, column_name):
     '''
