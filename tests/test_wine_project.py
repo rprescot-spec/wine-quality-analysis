@@ -2,7 +2,7 @@ import pytest
 
 from src.wine_dataset import WineDataset
 from src.wine_analyzer import WineQualityAnalyzer
-from src.wine_predictor import WinePredictor
+from src.wine_quality_predictor import WinePredictor
 
 def test_red_wine_dataset_loads_and_cleans():
   '''
