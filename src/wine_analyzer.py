@@ -192,8 +192,8 @@ class WineQualityAnalyzer:
 
     quality_comparison = {
       "shared_scores": this_quality_scores & other_quality_scores,
-      "only_in_{self.wine_type}_wine": this_quality_scores - other_quality_scores,
-      "only_in_{other_analyzer.wine_type}_wine": other_quality_scores - this_quality_scores,
+      f"only_in_{self.wine_type}_wine": this_quality_scores - other_quality_scores,
+      f"only_in_{other_analyzer.wine_type}_wine": other_quality_scores - this_quality_scores,
       "all_scores": this_quality_scores | other_quality_scores
     }
 
