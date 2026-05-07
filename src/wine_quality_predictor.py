@@ -96,7 +96,8 @@ class WinePredictor:
     """
     This returns a completely random wine from the dataset using the Random function.
     """
-    random_wine=self.data.sample(n=1)
+    random_index=random.choice(list(self.data.index))
+    random_wine=self.data.loc[[random_index]]
     generator=self.generate_wine(random_wine)
     return next(generator)
 
