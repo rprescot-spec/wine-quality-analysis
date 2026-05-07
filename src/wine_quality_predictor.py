@@ -3,7 +3,7 @@ from src.wine_analyzer import WineQualityAnalyzer
 
 class WinePredictor:
   """
-  This uses the WineQualityAanlyzer class from the analyzer function to predict the quality of a wine based on a user input or recommend a wine based on a user input of different quality standards.
+  This uses the WineQualityAnalyzer class from the analyzer function to predict the quality of a wine based on a user input or recommend a wine based on a user input of different quality standards.
   """
   def __init__(self, analyzer):
     #This makes sure the analyzer is an object that exists within the WineQualityAnalyzer so the functions can move forward.
@@ -84,7 +84,7 @@ class WinePredictor:
 
     return df.sort_values("distance").head(top_n)
 
-  def generate_wine(self):
+  def generate_wine(self, wines):
     """
     This generates  wine from the dataset for the user.
     """
@@ -96,8 +96,8 @@ class WinePredictor:
     """
     This returns a completely random wine from the dataset using the Random function.
     """
-    random_wine=self.data.sample(n-1)
-    generator=self.wine_generator(random_wine)
+    random_wine=self.data.sample(n=1)
+    generator=self.generate_wine(random_wine)
     return next(generator)
 
   def wine_by_feature(
@@ -110,23 +110,24 @@ class WinePredictor:
     This allows the user to generate a wine from the dataset based on their preferred features
     """
     filtered=self.data.copy()
+    #The series of if statements check if the input from the user aligns with the parameters for types of wine in the dataset
     if minimum_quality is not None:
       filtered=filtered[
-      filtered["quality"]>=minimum_quality
+        filtered["quality"]>=minimum_quality
       ]
     if minimum_alcohol is not None:
       filtered=filtered[
-      filtered["alcohol"]<= minimum_alcohol
+        filtered["alcohol"]>= minimum_alcohol
       ]
     if maximum_acidity is not None:
       filtered=filtered[
-      filtered["volatile acidity"]<= maximum_acidity
+        filtered["volatile acidity"]<= maximum_acidity
       ]
-      if len(filtered)==0:
-        raise ValueError("We do not have wines that match the given features. Try again.")
-      random_wine=filtered.sample(n-1)
-      generator=self.wine_generator(random_wine)
-      return next(generator)
+    if len(filtered)==0:
+      raise ValueError("We do not have wines that match the given features. Try again.")
+    random_wine=filtered.sample(n=1)
+    generator=self.wine_generator(random_wine)
+    return next(generator)
 
   def wine_selection(self, mode="random", **preferences):
     """
