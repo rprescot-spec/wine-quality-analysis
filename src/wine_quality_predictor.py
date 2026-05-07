@@ -126,7 +126,7 @@ class WinePredictor:
     if len(filtered)==0:
       raise ValueError("We do not have wines that match the given features. Try again.")
     random_wine=filtered.sample(n=1)
-    generator=self.wine_generator(random_wine)
+    generator=self.generate_wine(random_wine)
     return next(generator)
 
   def wine_selection(self, mode="random", **preferences):
