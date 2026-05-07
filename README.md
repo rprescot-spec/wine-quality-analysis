@@ -30,19 +30,19 @@ Wine_Quality_Analysis/
 - README.md
 - requirments.txt
 - data/
--   'winequality-red.csv'
--   'winequality-white.csv'
--   'winequality.names'
+- - 'winequality-red.csv'
+- - 'winequality-white.csv'
+- - 'winequality.names'
 - src/
--   __init__.py
--   wine_dataset.py
--   wine_analyzer.py
--   wine_visuals.py
--   wine_quality_predictor.py
+- - __init__.py
+- - wine_dataset.py
+- - wine_analyzer.py
+- - wine_visuals.py
+- - wine_quality_predictor.py
 - tests/
--   test_wine_project.py
+- - test_wine_project.py
 - figures/
--   generated graph images 
+- - generated graph images 
 
 ## Project Section
 #### Project setup
