@@ -6,7 +6,7 @@ def plot_quality_distribution(analyzer, output_folder="figures"):
   Create a bar chart showing how many wines have each quality score
   '''
   output_path = Path(output_folder)
-  output_path.mkdir(exist_ok=True)
+  output_path.mkdir(parents=True, exist_ok=True)
 
   quality_counts = analyzer.wine_dataset.get_quality_counts()
 
@@ -35,7 +35,7 @@ def plot_average_by_quality(analyzer, column_name, output_folder="figures"):
   Create a line graph showing the average value of a column by quality score
   '''
   output_path = Path(output_folder)
-  output_path.mkdir(exist_ok=True)
+  output_path.mkdir(parents=True, exist_ok=True)
 
   averages = analyzer.get_average_by_quality(column_name)
 
