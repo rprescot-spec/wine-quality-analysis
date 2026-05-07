@@ -21,6 +21,7 @@ class WineQualityAnalyzer:
     if wine_dataset.data is None:
       raise ValueError("The WineDataset must be loaded and cleaned before analysis")
 
+    # Store the cleaned dataset and wine type so analyzer can reuse them
     self.wine_dataset = wine_dataset
     self.data = wine_dataset.data
     self.wine_type = wine_dataset.wine_type
@@ -46,6 +47,7 @@ class WineQualityAnalyzer:
     '''
     numeric_columns = []
 
+    # Only numeric colums can be used for summary calculations
     for column in self.data.columns:
       if pd.api.types.is_numeric_dtype(self.data[column]):
         numeric_columns.append(column)
@@ -71,6 +73,7 @@ class WineQualityAnalyzer:
     '''
     Calculate the average value of a selected numeric column
     '''
+    # Validate the column before performing calculations
     if column_name not in self.data.columns:
       raise ValueError(f"{column_name} is not a column in the dataset")
 
@@ -88,8 +91,10 @@ class WineQualityAnalyzer:
 
     averages = {}
 
+    # Use a set to get each unique quality score and then sort it for the output
     quality_scores = sorted(set(self.data["quality"]))
 
+    # Calculate the column average separately for each quality score
     for quality in quality_scores:
       quality_rows = self.data[self.data["quality"] == quality]
       averages[quality] = round(quality_rows[column_name].mean(), 3)
@@ -103,6 +108,7 @@ class WineQualityAnalyzer:
     if number_of_wines <= 0:
       raise ValueError("number_of_wines must be greater than 0")
 
+    # Sort by quality first with alcohol as a tiebreaker
     top_wines = self.data.sort_values(
       by=["quality", "alcohol"],
       ascending=[False, False]
@@ -120,6 +126,7 @@ class WineQualityAnalyzer:
       "high": 0
     }
 
+    # 4 and below are low, 5-6 are medium, 7 and above are high
     for quality in self.data["quality"]:
       if quality <= 4:
         categories["low"] += 1
@@ -179,9 +186,15 @@ class WineQualityAnalyzer:
     if not isinstance(other_analyzer, WineQualityAnalyzer):
       raise TypeError("other_analyzer must be a WineQualityAnalyzer object.")
 
+    # Convert quality scores to sets so the intersection operator can find shared scores
     this_quality_scores = set(self.data["quality"])
     other_quality_scores = set(other_analyzer.data["quality"])
 
-    shared_scores = this_quality_scores & other_quality_scores
+    quality_comparison = {
+      "shared_scores": this_quality_scores & other_quality_scores,
+      "only_in_this_dataset": this_quality_scores - other_quality_scores,
+      "only_in_other_dataset": other_quality_scores - this_quality_scores,
+      "all_scores": this_quality_scores | other_quality_scores
+    }
 
-    return shared_scores
+    return quality_comparison
