@@ -5,18 +5,19 @@ class WinePredictor:
   This uses the WineQualityAanlyzer class from the analyzer function to predict the quality of a wine based on a user input or recommend a wine based on a user input of different quality standards.
   """
   def __init__(self, analyzer):
+    #This makes sure the analyzer is an object that exists within the WineQualityAnalyzer so the functions can move forward.
     if not isinstance(analyzer, WineQualityAnalyzer):
-      raise TypeError("The analyzer must be an object in WineQualityAnalyzer. try again.")
+      raise TypeError("The analyzer must be an object in WineQualityAnalyzer. Try again.")
 
     self.analyzer = analyzer
     self.data = analyzer.data
 
   def predict_quality(self, user_features):
     '''
-    Estimate a wine quality score based on user-provided features 
+    Estimate a wine quality score based on user-provided features.
     '''
     high_quality_avg = self.analyzer.get_high_quality_feature_summary()
-
+    
     weights = {
       "alcohol": 2.0,
       "volatile acidity": 2.0,
@@ -30,12 +31,14 @@ class WinePredictor:
     total_weight = 0
     
     for feature, weight in weights.items():
+      #This makes sure the wine feature specified by the user exists
       if feature not in user_features:
         raise ValueError(f"Missing feature: {feature}")
         
       user_value=user_features[feature]
       ideal_value=high_quality_avg[feature]
 
+      #This finds the difference between the users' inputted feature values and the ideal value for that feature to determine if it is good or bad quality in relation to the ideal quality
       diff=abs(user_value-ideal_value)
       correlation=max(0,1-diff/(ideal_value+1e-5))
 
