@@ -1,11 +1,12 @@
 # Wine Quality Analysis
 #### Rachael Prescott, rprescot@stevens.edu, 20006395
 #### Isabella Dona, idona@stevens.edu, 20006555
-#### Overview
+
+## Overview
 Our project analyzes the quality of wines from the UCI Wine Quality dataset and allows the data to be manipulated by the user.
 The UCI dataset contains chemical measurements for major components of red and white wine variations, including acidity, sugar content, alcohol content, pH, and sulfur content, which can be used to determine the quality of the wine. The purpose of this project is to load and clean the wine data, analyze patterns in the quality, create visualizations, estimate wine quality using rule-based logic, and recommend wines based on user prefrences. 
 
-##Dataset
+#### Dataset
 Dataset used: UCI Wine Quality Dataset
 Source: https://archive.ics.uci.edu/dataset/186/wine+quality
 Files used:
@@ -14,7 +15,7 @@ Files used:
 - 'winequality.names'
 These were all stored in the data folder
 
-## Libraries used
+#### Libraries used
 This project uses the following python libraries:
 - 'pandas' for reading and processing CSV data
 - 'numpy' for numerical calculation
@@ -23,7 +24,7 @@ This project uses the following python libraries:
 - 'pathlib' for working with file paths
 - 'random' for random wine selection
 
-## File Structure
+#### File Structure
 Wine_Quality_Analysis/
 - Wine_Quality_Analysis.ipynb
 - README.md
@@ -58,7 +59,8 @@ Used WinePredictor class. Predicts wine quality based on features input by the u
 Dispalys examples of handling exceptions, including missing files, invalid columsn, and missing user input features.
 ##### PyTest Testing
 Uses Pytest to test important parts of the prject, including dataset loading, analyzer summaries, invalid input handling, and quality prediction.
-#### Running the Program
+
+## Running the Program
 1. Download the repository
 2. Install the required libraries
 3. Open the main notebook
