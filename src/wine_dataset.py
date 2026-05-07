@@ -10,11 +10,15 @@ class WineDataset:
   the clean data for analysis.
   '''
   
-  # Create WineDataset object
   def __init__(self, file_path, wine_type="unknown"):
+    '''
+    Create wine dataset object
+    '''
     self.file_path = Path(file_path)
     self.wine_type = wine_type
     self.data = None
+    
+    # Column names identified in the dataset placed in a tuple so they cannot be altered
     self.required_columns = (
       "fixed acidity",
       "volatile acidity",
@@ -30,22 +34,30 @@ class WineDataset:
       "quality"
     )
 
-  # Return description of dataset object
   def __str__(self):
+    '''
+    Return a description of the dataset object
+    '''
+    # If the file has not been loaded show that it exists but is not yet usable
     if self.data is None:
       return f"WineDataset({self.wine_type} wine, not loaded yet)"
 
     return f"WineDataset({self.wine_type} wine, {len(self.data)} rows loaded)"
 
-  # Return number of rows in cleaned dataset
   def __len__(self):
+    '''
+    Return the number of rows in cleaned dataset
+    '''
+    # Return zero if data is not loaded yer
     if self.data is None:
       return 0
 
     return len(self.data)
 
-  # Load wine dataset from csv file
   def load_data(self):
+    '''
+    Load the wine dataset from csv file
+    '''
     # Error if the csv file does not exist
     if not self.file_path.exists():
       raise FileNotFoundError(f"Could not find the file: {self.file_path}")
@@ -59,8 +71,10 @@ class WineDataset:
 
     return self.data
 
-  # Check that the dataset has all required columns
   def check_required_columns(self):
+    '''
+    Check that the dataset has all required columns
+    '''
     # Error if data is not loaded before checking columns
     if self.data is None:
       raise ValueError("Data must be loaded before checking columns")
@@ -78,8 +92,10 @@ class WineDataset:
 
     return True
 
-  # Clean the loaded wine dataset
   def clean_data(self):
+    '''
+    Clean the loaded wine dataset
+    '''
     # Error is data is not loaded before cleaning
     if self.data is None:
       raise ValueError("Data must be loaded before cleaning")
@@ -87,7 +103,7 @@ class WineDataset:
     # Check required columns before cleaning
     self.check_required_columns()
 
-    # Baseline cleaning summary
+    # Baseline cleaning summary stored in a dictionary
     cleaning_summary = {
       "starting_rows": len(self.data),
       "duplicates_removed": 0,
@@ -95,7 +111,6 @@ class WineDataset:
       "ending_rows": 0
     }
 
-    # Identify number of initial row
     starting_rows = len(self.data)
 
     # Count amount of duplicates and update summary
@@ -120,14 +135,18 @@ class WineDataset:
 
     return cleaning_summary
 
-  # Load the csv file and clean the dataset
   def load_and_clean(self):
+    '''
+    Load the csv file and clean the dataset
+    '''
     self.load_data()
     summary = self.clean_data()
     return summary
 
-  # Count number of wines with each quality score
   def get_quality_counts(self):
+    '''
+    Count number of wines with each quality score
+    '''
     # Error if data is not loaded yet
     if self.data is None:
       raise ValueError("Data must be loaded and cleaned first")
