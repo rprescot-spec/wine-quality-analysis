@@ -179,7 +179,7 @@ class WineQualityAnalyzer:
     else:
       return f"{self.wine_type} wine and {other_analyzer.wine_type} wine have the same average quality"
 
-  def get_shared_quality_scores(self, other_analyzer):
+  def compare_quality_score_sets(self, other_analyzer):
     '''
     Find quality scores that appear in both wine datasets using set operations.
     '''
